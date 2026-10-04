@@ -14,6 +14,16 @@ export const WS_URLS = {
 } as const;
 
 /**
+ * Protocol revision, bumped when a change is not backward compatible.
+ *
+ * Sent in the `login` handshake as a proposal so the executor can warn when a
+ * phone runs a newer core than the executor it is talking to. Without it,
+ * skew shows up as randomly missing message types rather than a clear error.
+ * See the plan's backend change requests.
+ */
+export const PROTOCOL_VERSION = 1;
+
+/**
  * The `login` handshake. Sent as the first frame after the socket opens.
  *
  * `uid` and `session_uid` are both the `global-<uuid>` session UID - they
@@ -26,7 +36,7 @@ export type LoginFrame = {
   session_uid: string;
   access: string;
   client_type?: "desktop" | "mobile";
-  /** Proposed: lets the executor warn when phone and executor disagree. */
+  /** Lets the executor warn on skew between phone and executor. */
   protocol_version?: number;
 };
 
