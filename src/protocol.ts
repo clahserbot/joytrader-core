@@ -90,6 +90,13 @@ export const INBOUND_TYPES = {
   allManual: "get_all_manual",
   /** Alert definitions. -> handlers/alert.rs */
   allAlerts: "get_all_alerts",
+  /**
+   * The LIVE alert set. Distinct from allAlerts, and the one that actually
+   * carries data: measured 2026-10-04, get_alerts returned 11 rows while
+   * get_all_alerts returned 0. The desktop listens for this one.
+   * -> handlers/alert.rs:126
+   */
+  activeAlerts: "get_alerts",
   /** Live or historical candles. */
   candles: "get_candles",
   /** Live candle tick. -> handlers/ohlc.rs */
