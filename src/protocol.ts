@@ -14,6 +14,23 @@ export const WS_URLS = {
 } as const;
 
 /**
+ * Build the WebSocket URL for a session.
+ *
+ * THE SESSION UID IS A PATH SEGMENT, NOT JUST A PAYLOAD FIELD.
+ * The executor registers its WS route as `/{uid}` (src/main.rs), so the
+ * handshake is rejected outright without it. Measured 2026-10-04:
+ *
+ *   wss://callback.joycloud.io                 -> handshake ERROR
+ *   wss://callback.joycloud.io/global-test123  -> OPENED
+ *
+ * The desktop has always done this - `${wsUrl}/${sessionUid}` in
+ * app/layout.tsx - and also sends `uid` inside the login frame. Both are
+ * required: the path routes the connection, the frame authenticates it.
+ */
+export const wsUrlFor = (sessionUid: string): string =>
+  `${WS_URLS.ws}/${encodeURIComponent(sessionUid)}`;
+
+/**
  * Protocol revision, bumped when a change is not backward compatible.
  *
  * Sent in the `login` handshake as a proposal so the executor can warn when a
