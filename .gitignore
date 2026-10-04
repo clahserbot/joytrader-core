@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/versions
+.pnp.*
+
+# Build output
+dist/
+build/
+*.tsbuildinfo
+
+# Environment & secrets — never commit
+.env
+.env*
+*.pem
+*.key
+
+# Editor / OS
+.DS_Store
+*.log
+.idea/
+.vscode/
+
+# Compiled copies of the desktop originals, used only by scripts/parity-check.js
+scripts/orig-*.js

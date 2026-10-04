@@ -1,0 +1,20 @@
+{
+  "name": "@joytrader/core",
+  "version": "0.1.0",
+  "description": "Platform-agnostic domain logic shared by the JoyTrader desktop (Tauri/Next.js) and mobile (React Native) clients: P&L aggregation, IST market calendar, session UID derivation, and the WebSocket protocol client.",
+  "license": "UNLICENSED",
+  "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "devDependencies": {
+    "typescript": "^5"
+  }
+}
